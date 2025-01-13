@@ -6,6 +6,7 @@ import com.codework.fixmate.dao.repositories.UserRepository;
 import com.codework.fixmate.service.dtos.UserDTO;
 import com.codework.fixmate.service.dtos.signUpRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +22,8 @@ public class authServiceImpl implements authService{
         user.setLastName(signUprequestDTO.getLastName());
         user.setEmail(signUprequestDTO.getEmail());
         user.setPhone(signUprequestDTO.getPhone());
-        user.setPassword(signUprequestDTO.getPassword());
+      //  user.setPassword(signUprequestDTO.getPassword());
+        user.setPassword(new BCryptPasswordEncoder().encode(signUprequestDTO.getPassword()));
         user.setRole(userRole.client);
 
         return userRepository.save(user).getDTO();
@@ -39,7 +41,8 @@ public class authServiceImpl implements authService{
         user.setName(signUprequestDTO.getName());
         user.setEmail(signUprequestDTO.getEmail());
         user.setPhone(signUprequestDTO.getPhone());
-        user.setPassword(signUprequestDTO.getPassword());
+        //user.setPassword(signUprequestDTO.getPassword());
+        user.setPassword(new BCryptPasswordEncoder().encode(signUprequestDTO.getPassword()));
         user.setRole(userRole.company);
 
         return userRepository.save(user).getDTO();
