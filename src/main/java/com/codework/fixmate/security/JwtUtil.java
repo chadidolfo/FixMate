@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    public static final String SECRET = "sOiJThTvQYUikEaUYfeo";
+    public static final String SECRET = "VGZRC9UsBdh0CYAxprbet2xMqH1xHGWjaFJHq89y0QyQrw8b3swpBgGglXFVWf50";
 
     private String createToken(Map<String,Object> claims , String userName){
 
@@ -33,13 +33,13 @@ public class JwtUtil {
         byte[] KeyBytes = Decoders.BASE64.decode(SECRET);
         return Keys.hmacShaKeyFor(KeyBytes);
     }
-
+    //claims = data stored inside the JWT(username,...)
     public String generateToken (String userName){
         Map<String,Object> claims = new HashMap<>();
         return createToken(claims,userName);
     }
 
-    //claims = data stored inside the JWT(username,...)
+
     private Claims extractAllClaims(String Token){
         return Jwts
                 .parser()
